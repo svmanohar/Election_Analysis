@@ -1,13 +1,8 @@
 # ----PyPoll Script----
 
-# 1. Import data from csv
-# 2. Loop through data, initializing dictionary for each unique candidate. Each key is the candidate, and their running sum of votes is value
-# 3. Sum the number of votes, either by counting number of dictionaries OR by creating a running tally. Location is not important here...
-# 4. Complete basic stats (total votes/candidate, % votes/candidate, candidate with most votes
-
 # Dataset is stored in Resources/election_results.csv
 # We will use a relative path "Resources/election_results.csv". If this was stored in Election_Analysis itself, the relative path would just be the file name "election_results.csv"
-
+# Analysis file is output to "analysis/election_analysis.txt" as a text file
 # ----------------------------------------------------------------
 # import modules
 import os
@@ -69,6 +64,19 @@ with open(file_to_load) as election_data:
         # for any subsequent row, we can add +1 to the key:value pair with key candidate_name in the dictionary candidate_votes
         candidate_votes[candidate_name] += 1
 
+# Using a context manager, open file_to_save in write mode. Will create a new file with filename above if it doesn't exist
+with open(file_to_save, "w") as txt_file:
+
+    # Print the final vote count to the terminal.
+    election_results = (
+        f"\nElection Results\n"
+        f"-------------------------\n"
+        f"Total Votes: {total_votes:,}\n"
+        f"-------------------------\n")
+    print(election_results, end="")
+
+    # Save the final vote count to the text file.
+    txt_file.write(election_results)
 
     print(total_votes)
     print(candidate_options)
@@ -91,21 +99,23 @@ with open(file_to_load) as election_data:
 
         # Use f-string formatting to access the key of each pair (candidate[0]) and insert that, as well as vote percentage for each candidate
         # Print the statement
-        print(f"{candidate[0]}: {vote_percentage:.1f}% ({candidate[1]:,})\n")
+        # Write the statement to our report file
+        candidate_results = (f"{candidate[0]}: {vote_percentage:.1f}% ({candidate[1]:,})\n")
+        print(candidate_results)
+        txt_file.write(candidate_results)
 
+    # Establish formatting for our winning candidate's report using f-string formatting and casting multiple strings to winning_candidate_summary variable
     winning_candidate_summary = (
     f"-------------------------\n"
     f"Winner: {winning_candidate}\n"
     f"Winning Vote Count: {winning_count:,}\n"
     f"Winning Percentage: {winning_percentage:.1f}%\n"
     f"-------------------------\n")
+    
+    # Print and write our winner's summary to our report file
     print(winning_candidate_summary)
+    txt_file.write(winning_candidate_summary)
 
 
-# Using a context manager, open file_to_save in write mode. Will create a new file with filename above if it doesn't exist
-with open(file_to_save, "w") as txt_file:
 
-    # \n is an ESCAPE SEQUENCE to signify starting a new line
-    txt_file.write("Counties in the Election\n------------------------------\n")
-    txt_file.write("Arapahoe\nDenver\nJefferson")
 
