@@ -4,6 +4,7 @@
 # We will use a relative path "Resources/election_results.csv". If this was stored in Election_Analysis itself, the relative path would just be the file name "election_results.csv"
 # Analysis file is output to "analysis/election_analysis.txt" as a text file
 # ----------------------------------------------------------------
+
 # import modules
 import os
 import csv
