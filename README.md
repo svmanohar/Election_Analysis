@@ -41,3 +41,9 @@ After analyzing the dataset, we can conclude the following:
 * One option to give users more flexibility to reuse code is to allow users to input the file name and output file names, by using the `input()` function and some string concatenation. By assigning `input_name = input() + ".csv` and `output_name = input() + ".txt"` we can allow the user to analyze multiple .csv files and output them to different reports, enhancing the scalability of this code. See below for an example of this:
 
 ![Input control](Resources/input_control.png)
+
+* Going one step further, I've refactored the code to be able to accept multiple input files stored in the Resources folder. `os.walk()` looks through all files in the specified folder `"Resources"` and extracts all file names in it, storing the names to `file_list`. We can then loop through each file name and use it as an input as seen below. Each CSV file's analysis is given a unique name with suffix `"_analysis.txt"`. In practical terms, one could have multiple states' or provinces' election data stored in the `"Resources"` folder and this script would now loop through all of them and produce a unique output file for each analysis run. 
+
+Refactored code is as follows:
+
+![Input control](Resources/multiple_inputs.png)
