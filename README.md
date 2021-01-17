@@ -40,4 +40,4 @@ After analyzing the dataset, we can conclude the following:
 
 * One option to give users more flexibility to reuse code is to allow users to input the file name and output file names, by using the `input()` function and some string concatenation. By assigning `input_name = input() + ".csv` and `output_name = input() + ".txt"` we can allow the user to analyze multiple .csv files and output them to different reports, enhancing the scalability of this code. See below for an example of this:
 
-![Input control image](Resources/input_control image.png)
+![Input control](Resources/input_control.png)
